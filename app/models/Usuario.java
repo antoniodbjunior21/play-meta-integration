@@ -6,7 +6,6 @@ import play.db.jpa.JPA;
 
 import javax.persistence.*;
 
-@Audited
 @Entity
 public class Usuario extends BaseImobiliaria {
 

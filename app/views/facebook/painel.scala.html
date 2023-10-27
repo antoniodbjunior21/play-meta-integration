@@ -1,0 +1,113 @@
+@()
+@js = {
+    <script src="@routes.Assets.versioned("js/facebook/integracao-facebook.js")"></script>
+
+    <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '857557189361566',
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v2.8'
+                });
+
+                FB.AppEvents.logPageView();
+
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            //funcao padrao do facebook, não remova!
+            function checkLoginState(){
+                IntegracaoFacebook.checkLoginState();
+            }
+
+    </script>
+
+    <script type="text/javascript">
+            "use strict";
+
+            jQuery(document).ready(function () {
+                IntegracaoFacebook.init();
+            });
+    </script>
+}
+@css = {
+
+}
+@template.main("Facebook", js, css, "menu-facebook") {
+    <div class="pagetitle">
+        <h1>Facebook</h1>
+    </div>
+
+    <div id="dados-usuario" class="my-5">
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Nenhum usuario logado</h5>
+                <code></code>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button id="btn-logout" type="button" class="btn btn-primary mt-5" style="display: none">Logout</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <fb:login-button
+    scope="public_profile,email,pages_show_list,pages_manage_metadata,pages_messaging"
+    onlogin="checkLoginState();">
+    </fb:login-button>
+
+
+    <div id="dados-paginas" class="my-5">
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Páginas</h5>
+                <a href="" target="_blank">Ver Páginas do Usuário Logado</a>
+            </div>
+            <form class="my-4">
+                <div class="form-group">
+                    <label>Id página</label>
+                    <input type="text"  class="form-control" placeholder="Id pagina" value="" id="idPaginaInput">
+                </div>
+                <div class="form-group mt-3">
+                    <label>Token Página</label>
+                    <input type="text" class="form-control" placeholder="token pagina" value="" id="tokenPaginaInput">
+                </div>
+            </form>
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary m-2" id="btnIniciarWebhook">Habilitar Webhook</button>
+                <button type="button" class="btn btn-primary" id="btnAppsInstalados">Ver Apps instalados</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Requirements
+            </h3>
+            <p>
+                A Page access token requested from a person who can perform the ADVERTISE task on the Page being queried
+                The lead_retrieval permission
+                The pages_manage_metadata permission
+                The pages_show_list permission
+            </p>
+        </div>
+    </div>
+
+}

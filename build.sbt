@@ -15,7 +15,8 @@ libraryDependencies ++= Seq(
   javaWs,
   "org.hibernate" % "hibernate-entitymanager" % "4.3.10.Final",
   "org.hibernate" % "hibernate-envers" % "4.3.10.Final",
-  "org.postgresql" % "postgresql" % "42.2.2"
+  "org.postgresql" % "postgresql" % "42.2.2",
+  "com.restfb" % "restfb" % "2023.1.0"
 )
 
 resolvers ++= Seq(
