@@ -1,0 +1,105 @@
+@()
+@js = {
+    <script src="@routes.Assets.versioned("js/pessoa/pessoa.js")"></script>
+
+    <script type="text/javascript">
+            "use strict";
+
+            jQuery(document).ready(function() {
+                Pessoa.init();
+            });
+    </script>
+}
+@css ={
+
+}
+@template.main("Exercícios", js, css, "menu-pessoas") {
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ex. 1 - Salvando Pessoa</h5>
+                        <p class="card-text">Finalize esta operação, salvando uma pessoa no banco de dados, de acordo com as informações no formulário abaixo</p>
+                        <form id="formExercicio1">
+                            <div class="form-group">
+                                <label for="nomePessoa">Nome</label>
+                                <input type="text" name="nome" class="form-control" id="nomePessoa" placeholder="Insira o nome">
+                            </div>
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card card-custom gutter-b">
+                    <div class="card-body px-4 pb-3 pt-0">
+                        <div class="dataTables_wrapper">
+                            <table id="dataTable" class="table row-border table-striped table-hover table-bordered" cellspacing="0">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th>Nome</th>
+                                        <th>Ativo</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr class="bg-light">
+                                        <th>Nome</th>
+                                        <th>Ativo</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <form id="formPesquisa">
+                    <div class="card card-custom">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="card-icon">
+                                    <i class="fa fa-filter text-primary"></i>
+                                </span>
+                                <h3 class="card-label">
+                                    Filtrar Registros
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body pb-3">
+                            <div class="form-group">
+                                <label for="nome">Nome</label>
+                                <input type="text" name="nome" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="search-bar clearfix">
+                                <a id="buttonPesquisar" type="submit" class="btn btn-primary font-weight-bolder btn-block">
+                                    <i class="fa fa-search"></i> Buscar
+                                </a>
+
+                                <a id="buttonLimpar" type="reset" class="btn btn-light-dark font-weight-bolder btn-block">
+                                    <i class="fa fa-eraser"></i> Limpar
+                                </a>
+
+                                    <!-- Nao remover: Fix para submissao do formulario ao pressionar ENTER -->
+                                <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+}

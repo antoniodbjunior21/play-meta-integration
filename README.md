@@ -1,2 +1,2 @@
-# play-meta-integration
-For tests of meta integration Environment
+# app-treino
+app-treino
