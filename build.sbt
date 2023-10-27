@@ -1,5 +1,5 @@
 
-name := """app-treino"""
+name := """play-meta-integration"""
 
 version := "1.0-SNAPSHOT"
 

@@ -3,13 +3,11 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.Pessoas.abrirPaginaInicial()
-GET     /dashboard                  controllers.Dashboard.abrirDashboard()
-
-#PESSOAS
-GET     /pessoas                    controllers.Pessoas.abrirPaginaInicial()
-POST    /pessoa/salvar              controllers.Pessoas.salvar()
-POST    /pessoas/filtrar              controllers.Pessoas.filtrar()
+GET     /                           controllers.Dashboard.abrirDashboard()
+GET     /login                      controllers.Acesso.login()
+POST    /autenticar                 controllers.Acesso.autenticar()
+GET     /create                     controllers.Acesso.create()
+GET     /logout                     controllers.Acesso.logout()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

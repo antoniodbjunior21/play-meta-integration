@@ -15,6 +15,6 @@ public class AppSecurity extends Security.Authenticator {
 
     @Override
     public Result onUnauthorized(Http.Context ctx) {
-        return redirect("/");
+        return redirect("/login");
     }
 }

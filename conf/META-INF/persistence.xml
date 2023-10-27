@@ -12,7 +12,6 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="javax.persistence.sharedCache.mode" value="ENABLE_SELECTIVE"/>
-            <property name="org.hibernate.envers.default_schema" value="auditoria"/>
         </properties>
     </persistence-unit>
 
