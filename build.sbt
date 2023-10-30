@@ -16,7 +16,13 @@ libraryDependencies ++= Seq(
   "org.hibernate" % "hibernate-entitymanager" % "4.3.10.Final",
   "org.hibernate" % "hibernate-envers" % "4.3.10.Final",
   "org.postgresql" % "postgresql" % "42.2.2",
-  "com.restfb" % "restfb" % "2023.1.0"
+  "com.restfb" % "restfb" % "2023.1.0",
+  "javax.xml.bind" % "jaxb-api" % "2.2.11",
+  "com.sun.xml.bind" % "jaxb-core" % "2.2.11",
+  "com.sun.xml.bind" % "jaxb-core" % "2.2.11",
+  "com.sun.xml.bind" % "jaxb-impl" % "2.2.11",
+  "jakarta.xml.bind" % "jakarta.xml.bind-api" % "3.0.1",
+  "org.glassfish.jaxb" % "jaxb-runtime" % "2.3.2"
 )
 
 resolvers ++= Seq(
