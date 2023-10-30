@@ -3,13 +3,23 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.Pessoas.abrirPaginaInicial()
-GET     /dashboard                  controllers.Dashboard.abrirDashboard()
+GET         /                                      controllers.Dashboard.abrirDashboard()
+GET         /login                                 controllers.Acesso.login()
+POST        /autenticar                            controllers.Acesso.autenticar()
+GET         /create                                controllers.Acesso.create()
+GET         /logout                                controllers.Acesso.logout()
+GET         /facebook                              controllers.Facebook.abrirPainel()
+GET         /facebook/webhook                      controllers.Facebook.validacaoWebhook()
+POST        /facebook/webhook                      controllers.Facebook.webhook()
+GET         /facebook/webhook/recebidos            controllers.Facebook.recebidos()
+GET         /facebook/webhook/excluir              controllers.Facebook.excluir()
+GET         /facebook/webhook/excluir/todos        controllers.Facebook.excluirTodos()
+GET         /facebook/pages-tokens                 controllers.Facebook.pagesTokens()
+GET         /facebook/cadastrar-webhook            controllers.Facebook.setWebhook()
+GET         /facebook/apps-instalados              controllers.Facebook.instaledApps()
+GET         /facebook/user                         controllers.Facebook.user()
 
-#PESSOAS
-GET     /pessoas                    controllers.Pessoas.abrirPaginaInicial()
-POST    /pessoa/salvar              controllers.Pessoas.salvar()
-POST    /pessoas/filtrar              controllers.Pessoas.filtrar()
+# Facebook
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)

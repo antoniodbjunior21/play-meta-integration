@@ -6,7 +6,6 @@ import play.db.jpa.JPA;
 
 import javax.persistence.*;
 
-@Audited
 @Entity
 public class Usuario extends BaseImobiliaria {
 
@@ -28,9 +27,18 @@ public class Usuario extends BaseImobiliaria {
     @NotEmpty
     private String email;
 
+    private String senha;
+
     public static Usuario buscarPorId(Long id) {
         Query query = JPA.em().createQuery("SELECT u FROM Usuario u WHERE u.id = :id ");
         query.setParameter("id", id);
+        return (Usuario) query.getSingleResult();
+    }
+
+    public static Usuario buscarPor(String email, String senha) {
+        Query query = JPA.em().createQuery("SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha");
+        query.setParameter("email", email);
+        query.setParameter("senha", senha);
         return (Usuario) query.getSingleResult();
     }
 
@@ -56,5 +64,13 @@ public class Usuario extends BaseImobiliaria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
