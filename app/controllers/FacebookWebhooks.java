@@ -14,8 +14,10 @@ import play.mvc.Result;
 import play.mvc.Security;
 import security.AppSecurity;
 import services.FacebookService;
+import utils.DateUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -78,7 +80,7 @@ public class FacebookWebhooks extends Controller {
                 } catch (Exception ignored) {
                 }
             }
-            System.out.println("received");
+            System.out.println("received new "+ DateUtil.formataTimestamp(new Date()));
             return ok(Json.toJson(dtos));
         } catch (Exception e) {
             return badRequest();
