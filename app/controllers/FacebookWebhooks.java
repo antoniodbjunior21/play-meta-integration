@@ -3,7 +3,9 @@ package controllers;
 import beans.facebook.FBWebhookDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import models.FacebookConfiguracao;
 import models.FacebookWebhook;
+import models.Usuario;
 import play.data.DynamicForm;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -17,18 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Facebook extends Controller {
-
-    @Transactional
-    @Security.Authenticated(AppSecurity.class)
-    public Result abrirPainel() {
-        try {
-            return ok(views.html.facebook.painel.render());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return badRequest();
-        }
-    }
+public class FacebookWebhooks extends Controller {
 
     @Transactional
     public Result user() {
@@ -36,7 +27,7 @@ public class Facebook extends Controller {
             DynamicForm dynamicForm = DynamicForm.form().bindFromRequest();
             String token = dynamicForm.get("token");
             return ok(Json.toJson(FacebookService.getMe(token)));
-        }catch (Exception e){
+        } catch (Exception e) {
             return badRequest();
         }
     }
@@ -79,12 +70,13 @@ public class Facebook extends Controller {
             List<FacebookWebhook> webhooks = FacebookWebhook.buscar();
             ObjectMapper mapper = new ObjectMapper();
             List<FBWebhookDTO> dtos = new ArrayList<>();
-            for (FacebookWebhook webhook : webhooks){
+            for (FacebookWebhook webhook : webhooks) {
                 try {
                     FBWebhookDTO dto = Json.mapper().readValue(webhook.getContent(), FBWebhookDTO.class);
                     dto.id = webhook.getId();
                     dtos.add(dto);
-                }catch (Exception ignored){}
+                } catch (Exception ignored) {
+                }
             }
             System.out.println("received");
             return ok(Json.toJson(dtos));
@@ -97,10 +89,10 @@ public class Facebook extends Controller {
     public Result excluirTodos() {
         try {
             List<FacebookWebhook> webhooks = FacebookWebhook.buscar();
-            for (FacebookWebhook webhook: webhooks){
+            for (FacebookWebhook webhook : webhooks) {
                 webhook.excluir();
             }
-            return redirect(routes.Facebook.recebidos());
+            return redirect(routes.FacebookWebhooks.recebidos());
         } catch (Exception e) {
             return badRequest();
         }
@@ -113,7 +105,7 @@ public class Facebook extends Controller {
             Long id = Long.valueOf(dynamicForm.get("id"));
             FacebookWebhook facebookWebhook = (FacebookWebhook) FacebookWebhook.buscarPorId(FacebookWebhook.class, id);
             facebookWebhook.excluir();
-            return redirect(routes.Facebook.recebidos());
+            return redirect(routes.FacebookWebhooks.recebidos());
         } catch (Exception e) {
             return badRequest();
         }

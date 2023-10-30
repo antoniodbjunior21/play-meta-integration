@@ -1,6 +1,5 @@
 package models;
 
-import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 import play.db.jpa.JPA;
 
@@ -28,6 +27,9 @@ public class Usuario extends BaseImobiliaria {
     private String email;
 
     private String senha;
+
+    @Column(name = "app_id")
+    private String appId;
 
     public static Usuario buscarPorId(Long id) {
         Query query = JPA.em().createQuery("SELECT u FROM Usuario u WHERE u.id = :id ");

@@ -1,9 +1,5 @@
 var Auth = function () {
 
-    var init = function (){
-        initLoginForm()
-    }
-
     var initLoginForm = function (){
         $('#formLogin').validate({
             ignore: 'input[type=hidden]',
@@ -45,9 +41,49 @@ var Auth = function () {
             }
         });
     }
+
+    var initRegisterForm = function (){
+        $('#registerForm').validate({
+            ignore: 'input[type=hidden]',
+            rules: {
+                nome: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                },
+                senha: {
+                    required: true
+                }
+            },
+            errorClass: "invalid-feedback-error text-danger",
+            submitHandler: function (form) {
+
+                var formData = $(form).serializeArray();
+
+                console.log(formData)
+
+                $.ajax({
+                    method: 'GET',
+                    url: '/create',
+                    data: formData,
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    success: function () {
+                        console.log('success');
+                        window.location.replace("/");
+                    },
+                    error: function (jqXHR, exception) {
+                    }
+                });
+            }
+        });
+    }
     return{
-        init: function (){
-            init();
+        initLoginForm: function (){
+            initLoginForm();
+        },
+        initRegisterForm: function (){
+            initRegisterForm();
         }
     }
 }()
