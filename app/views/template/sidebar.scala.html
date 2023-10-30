@@ -5,6 +5,8 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
+        <li class="nav-heading">Usuário</li>
+
         <li class="nav-item">
             <a class="nav-link collapsed menu-dashboard" href="/">
                 <i class="bi bi-grid"></i>
@@ -13,34 +15,35 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed menu-facebook" href="@routes.Facebook.abrirPainel()">
+            <a class="nav-link collapsed menu-facebook" href="@routes.FacebookConfiguracoes.abrirPainelIntegracao()">
                 <i class="bi bi-facebook"></i>
                 <span>Facebook</span>
             </a>
         </li>
 
-        <li class="nav-heading">Pages</li>
+
+        <li class="nav-heading fw-bold">Testes</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
+            <a class="nav-link collapsed menu-facebook-configuracao" href="@routes.FacebookConfiguracoes.abrirPainelAplicativo()" target="_blank">
+                <i class="bi bi-facebook"></i>
+                <span>Configurar App Id</span>
             </a>
-        </li><!-- End Profile Page Nav -->
+        </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>F.A.Q</span>
+            <a class="nav-link collapsed" href="@routes.FacebookWebhooks.recebidos()" target="_blank">
+                <i class="bi bi-facebook"></i>
+                <span>Webhooks Recebidos</span>
             </a>
-        </li><!-- End F.A.Q Page Nav -->
+        </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-contact.html">
-                <i class="bi bi-envelope"></i>
-                <span>Contact</span>
+            <a class="nav-link collapsed" href="@routes.FacebookWebhooks.excluirTodos()" target="_blank">
+                <i class="bi bi-facebook"></i>
+                <span>Excluir todos Webhooks</span>
             </a>
-        </li><!-- End Contact Page Nav -->
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->

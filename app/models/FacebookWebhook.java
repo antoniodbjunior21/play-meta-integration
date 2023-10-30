@@ -19,8 +19,8 @@ public class FacebookWebhook extends BaseImobiliaria {
     }
 
     @Id
-    @SequenceGenerator(name = "seq_pessoa", sequenceName = "seq_pessoa", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa")
+    @SequenceGenerator(name = "seq_webhook", sequenceName = "seq_webhook", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_webhook")
     private Long id;
 
     @Lob

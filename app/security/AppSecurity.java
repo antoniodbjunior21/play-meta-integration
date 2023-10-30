@@ -1,8 +1,12 @@
 package security;
 
+import models.Usuario;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
+
+import static play.mvc.Http.Context.Implicit.request;
+import static play.mvc.Http.Context.Implicit.session;
 
 public class AppSecurity extends Security.Authenticator {
 
@@ -16,5 +20,9 @@ public class AppSecurity extends Security.Authenticator {
     @Override
     public Result onUnauthorized(Http.Context ctx) {
         return redirect("/login");
+    }
+
+    public static Usuario obterUsuarioLogado(){
+        return (Usuario) Usuario.buscarPorId(Usuario.class, Long.valueOf(session().get(USUARIO_LOGADO)));
     }
 }

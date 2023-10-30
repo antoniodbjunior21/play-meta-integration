@@ -1,11 +1,11 @@
-@()
+@(configuracao: models.FacebookConfiguracao, facebookAppId: String)
 @js = {
-    <script src="@routes.Assets.versioned("js/facebook/integracao-facebook.js")"></script>
+    <script src="@routes.Assets.versioned("js/facebook/facebook-integracao.js")"></script>
 
     <script>
             window.fbAsyncInit = function () {
                 FB.init({
-                    appId: '857557189361566',
+                    appId: '@facebookAppId',
                     cookie: true,
                     xfbml: true,
                     version: 'v2.8'
@@ -28,7 +28,7 @@
 
             //funcao padrao do facebook, não remova!
             function checkLoginState(){
-                IntegracaoFacebook.checkLoginState();
+                FacebookIntegracao.checkLoginState();
             }
 
     </script>
@@ -37,7 +37,7 @@
             "use strict";
 
             jQuery(document).ready(function () {
-                IntegracaoFacebook.init();
+                FacebookIntegracao.init();
             });
     </script>
 }
@@ -46,7 +46,7 @@
 }
 @template.main("Facebook", js, css, "menu-facebook") {
     <div class="pagetitle">
-        <h1>Facebook</h1>
+        <h1>Facebook | Integração</h1>
     </div>
 
     <div id="dados-usuario" class="my-5">

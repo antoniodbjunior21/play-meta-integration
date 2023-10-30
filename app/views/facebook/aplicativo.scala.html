@@ -1,0 +1,36 @@
+@(configuracao: models.ConfiguracaoGeral)
+@js = {
+    <script src="@routes.Assets.versioned("js/facebook/facebook-aplicativo.js")"></script>
+
+    <script type="text/javascript">
+            "use strict";
+
+            jQuery(document).ready(function () {
+                FacebookAplicativo.init();
+            });
+    </script>
+}
+@css = {
+
+}
+@template.main("Facebook", js, css, "menu-facebook-configuracao") {
+    <div class="pagetitle">
+        <h1>Facebook | Aplicativo</h1>
+    </div>
+    <div class="card mb-3">
+
+        <div class="card-body">
+            <form class="row g-3 needs-validation" novalidate id="formConfig">
+
+                <div class="col-12">
+                    <label for="yourUsername" class="form-label">Facebook App Id</label>
+                    <input type="text" name="facebookAppId" value="@configuracao.facebookAppId" class="form-control" id="yourUsername" required>
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}

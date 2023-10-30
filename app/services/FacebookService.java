@@ -37,7 +37,7 @@ public class FacebookService {
      * https://developers.facebook.com/docs/graph-api/webhooks/getting-started/webhooks-for-leadgen
      * */
     public static JsonNode setWeebhookFor(String pageId, String pageToken) throws IOException {
-        URL url = new URL("https://graph.facebook.com/"+pageId+"/subscribed_apps?subscribed_fields=leadgen&access_token="+pageToken);
+        URL url = new URL("https://graph.facebook.com/"+pageId+"/subscribed_apps?subscribed_fields=leadgen,feed,messages&access_token="+pageToken);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
         ObjectMapper mapper = new ObjectMapper();

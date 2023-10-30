@@ -12,7 +12,17 @@ public class Acesso extends Controller {
     @Transactional
     public Result login() {
         try {
-            return ok(views.html.login.login.render());
+            return ok(views.html.acesso.login.render());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest();
+        }
+    }
+
+    @Transactional
+    public Result register() {
+        try {
+            return ok(views.html.acesso.register.render());
         } catch (Exception e) {
             e.printStackTrace();
             return badRequest();

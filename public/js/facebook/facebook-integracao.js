@@ -1,4 +1,4 @@
-var IntegracaoFacebook = function () {
+var FacebookIntegracao = function () {
 
     var userId;
     var userAccessToken;
