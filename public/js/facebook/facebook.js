@@ -1,4 +1,4 @@
-var FacebookIntegracao = function () {
+var Facebook = function () {
 
     var userId;
     var userAccessToken;
@@ -18,13 +18,13 @@ var FacebookIntegracao = function () {
         $('#btnIniciarWebhook').click(()=>{
             var pageId = $('#idPaginaInput').val()
             var pageToken = $('#tokenPaginaInput').val()
-            window.open("/facebook/cadastrar-webhook?pageId="+pageId+"&pageToken="+pageToken);
+            window.open("/facebook/subscribe?pageId="+pageId+"&pageToken="+pageToken);
         })
 
         $('#btnAppsInstalados').click(()=>{
             var pageId = $('#idPaginaInput').val()
             var pageToken = $('#tokenPaginaInput').val()
-            window.open("/facebook/apps-instalados?pageId="+pageId+"&pageToken="+pageToken);
+            window.open("/facebook/subscription?pageId="+pageId+"&pageToken="+pageToken);
         })
     }
 
@@ -65,7 +65,7 @@ var FacebookIntegracao = function () {
             success: function (response) {
                 console.log(response)
                 $('#dados-usuario code').html(JSON.stringify(response));
-                linkPaginasTokens = '/facebook/pages-tokens?accessToken='+userAccessToken+"&userId="+userId;
+                linkPaginasTokens = '/facebook/pages?accessToken='+userAccessToken+"&userId="+userId;
                 $("#dados-paginas a").attr("href", linkPaginasTokens)
             },
             error: function (jqXHR, exception) {

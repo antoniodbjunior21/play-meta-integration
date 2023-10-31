@@ -3,7 +3,6 @@ package controllers;
 import beans.facebook.FBWebhookDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import models.FacebookConfiguracao;
 import models.FacebookWebhook;
 import models.Usuario;
 import play.data.DynamicForm;
@@ -21,7 +20,19 @@ import java.util.Date;
 import java.util.List;
 
 
-public class FacebookWebhooks extends Controller {
+public class FacebookResources extends Controller {
+
+    @Transactional
+    @Security.Authenticated(AppSecurity.class)
+    public Result abrirPainelIntegracao() {
+        try {
+            Usuario usuario = AppSecurity.obterUsuarioLogado();
+            return ok(views.html.facebook.integracao.render(usuario.getFacebookAppId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest();
+        }
+    }
 
     @Transactional
     public Result user() {
@@ -59,7 +70,7 @@ public class FacebookWebhooks extends Controller {
             FacebookWebhook webhook = new FacebookWebhook();
             webhook.setContent(jsonNode.toString());
             webhook.alterar();
-            System.out.println("received");
+            System.out.println("received new webhook "+ DateUtil.formataTimestamp(new Date()));
             return ok();
         } catch (Exception e) {
             return badRequest();
@@ -70,7 +81,6 @@ public class FacebookWebhooks extends Controller {
     public Result recebidos() {
         try {
             List<FacebookWebhook> webhooks = FacebookWebhook.buscar();
-            ObjectMapper mapper = new ObjectMapper();
             List<FBWebhookDTO> dtos = new ArrayList<>();
             for (FacebookWebhook webhook : webhooks) {
                 try {
@@ -80,7 +90,6 @@ public class FacebookWebhooks extends Controller {
                 } catch (Exception ignored) {
                 }
             }
-            System.out.println("received new "+ DateUtil.formataTimestamp(new Date()));
             return ok(Json.toJson(dtos));
         } catch (Exception e) {
             return badRequest();
@@ -94,7 +103,7 @@ public class FacebookWebhooks extends Controller {
             for (FacebookWebhook webhook : webhooks) {
                 webhook.excluir();
             }
-            return redirect(routes.FacebookWebhooks.recebidos());
+            return redirect(routes.FacebookResources.recebidos());
         } catch (Exception e) {
             return badRequest();
         }
@@ -107,7 +116,7 @@ public class FacebookWebhooks extends Controller {
             Long id = Long.valueOf(dynamicForm.get("id"));
             FacebookWebhook facebookWebhook = (FacebookWebhook) FacebookWebhook.buscarPorId(FacebookWebhook.class, id);
             facebookWebhook.excluir();
-            return redirect(routes.FacebookWebhooks.recebidos());
+            return redirect(routes.FacebookResources.recebidos());
         } catch (Exception e) {
             return badRequest();
         }
@@ -115,7 +124,7 @@ public class FacebookWebhooks extends Controller {
 
 
     @Transactional
-    public Result pagesTokens() {
+    public Result pages() {
         try {
             DynamicForm dynamicForm = DynamicForm.form().bindFromRequest();
             String accessToken = dynamicForm.get("accessToken");
@@ -127,24 +136,24 @@ public class FacebookWebhooks extends Controller {
     }
 
     @Transactional
-    public Result setWebhook() {
+    public Result startPageSubscription() {
         try {
             DynamicForm dynamicForm = DynamicForm.form().bindFromRequest();
             String pageId = dynamicForm.get("pageId");
             String pageToken = dynamicForm.get("pageToken");
-            return ok(FacebookService.setWeebhookFor(pageId, pageToken));
+            return ok(FacebookService.postSubscribe(pageId, pageToken));
         } catch (Exception e) {
             return badRequest();
         }
     }
 
     @Transactional
-    public Result instaledApps() {
+    public Result requestPageSubscriptionInfo() {
         try {
             DynamicForm dynamicForm = DynamicForm.form().bindFromRequest();
             String pageId = dynamicForm.get("pageId");
             String pageToken = dynamicForm.get("pageToken");
-            return ok(FacebookService.getPageInstaledApps(pageId, pageToken));
+            return ok(FacebookService.getSubscribe(pageId, pageToken));
         } catch (Exception e) {
             return badRequest();
         }

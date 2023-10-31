@@ -28,8 +28,8 @@ public class Usuario extends BaseImobiliaria {
 
     private String senha;
 
-    @Column(name = "app_id")
-    private String appId;
+    @Column(name = "facebook_app_id")
+    public String facebookAppId;
 
     public static Usuario buscarPorId(Long id) {
         Query query = JPA.em().createQuery("SELECT u FROM Usuario u WHERE u.id = :id ");
@@ -74,5 +74,13 @@ public class Usuario extends BaseImobiliaria {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getFacebookAppId() {
+        return facebookAppId;
+    }
+
+    public void setFacebookAppId(String facebookAppId) {
+        this.facebookAppId = facebookAppId;
     }
 }

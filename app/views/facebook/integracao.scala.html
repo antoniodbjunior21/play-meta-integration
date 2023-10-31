@@ -1,6 +1,6 @@
-@(configuracao: models.FacebookConfiguracao, facebookAppId: String)
+@(facebookAppId: String)
 @js = {
-    <script src="@routes.Assets.versioned("js/facebook/facebook-integracao.js")"></script>
+    <script src="@routes.Assets.versioned("js/facebook/facebook.js")"></script>
 
     <script>
             window.fbAsyncInit = function () {
@@ -28,7 +28,7 @@
 
             //funcao padrao do facebook, não remova!
             function checkLoginState(){
-                FacebookIntegracao.checkLoginState();
+                Facebook.checkLoginState();
             }
 
     </script>
@@ -37,7 +37,7 @@
             "use strict";
 
             jQuery(document).ready(function () {
-                FacebookIntegracao.init();
+                Facebook.init();
             });
     </script>
 }

@@ -32,10 +32,11 @@ var Auth = function () {
                     data: formData,
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     success: function () {
-                        console.log('success');
+                        SnackBar.show("Bem vindo!", 3000);
                         window.location.replace("/");
                     },
                     error: function (jqXHR, exception) {
+                        SnackBar.show("Nenhum usuário encontrado", 3000);
                     }
                 });
             }
@@ -69,10 +70,18 @@ var Auth = function () {
                     data: formData,
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     success: function () {
-                        console.log('success');
-                        window.location.replace("/");
+                        Swal.fire({
+                            title: "Tudo certo :)",
+                            text: "Usuário criado com sucesso",
+                            icon: "success",
+                            showCancelButton: false,
+                            confirmButtonText: "OK"
+                        }).then(function (result) {
+                            window.location.replace("/");
+                        });
                     },
                     error: function (jqXHR, exception) {
+
                     }
                 });
             }
