@@ -1,0 +1,44 @@
+@(facebookAppId: String)
+@js = {
+    <script src="@routes.Assets.versioned("js/configuracoes.js")"></script>
+
+    <script type="text/javascript">
+            "use strict";
+
+            jQuery(document).ready(function () {
+                Configuracoes.init();
+            });
+    </script>
+}
+@css = {
+
+}
+@template.main("Configurações", js, css, "menu-configuracoes") {
+    <div class="pagetitle">
+        <h1>Configurações</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Facebook</h5>
+                    <form class="row g-3 needs-validation" novalidate id="formConfig">
+                        <div class="col-12">
+                            <label for="yourUsername" class="form-label">App Id</label>
+                            <input type="text" name="facebookAppId" value="@facebookAppId" class="form-control" id="yourUsername" required>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="d-flex justify-content-end">
+                                <div>
+                                    <button class="btn btn-primary" type="submit">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

@@ -1,4 +1,4 @@
-var FacebookAplicativo = function () {
+var Configuracoes = function () {
 
     var init = function (){
         $('#formConfig').validate({
@@ -15,11 +15,17 @@ var FacebookAplicativo = function () {
 
                 $.ajax({
                     method: 'POST',
-                    url: '/facebook/configuracoes/salvar',
+                    url: '/configuracoes/salvar',
                     data: formData,
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     success: function () {
-                        alert("Salvo com sucesso")
+                        Swal.fire({
+                            title: "Tudo certo :)",
+                            text: "Configuração salva com sucesso",
+                            icon: "success",
+                            showCancelButton: false,
+                            confirmButtonText: "OK"
+                        }).then(function (result) {});
                     },
                     error: function (jqXHR, exception) {
                     }
